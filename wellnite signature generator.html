@@ -1,0 +1,192 @@
+<!--
+  SIGNATURE GENERATOR — WELLNITE
+  ============================================================
+  WHAT THIS IS:
+  A single file that each employee opens in their browser (double-click),
+  fills in with their own info and QR code, and gets a ready-to-copy
+  Gmail signature.
+
+  HOW TO ROLL THIS OUT TO THE TEAM (you do this once):
+  Share this .html file with everyone (Slack, Drive, email...).
+  Tell each person to:
+    1. Download it and double-click to open it in their browser.
+    2. Fill in their name, title, phone, LinkedIn, and QR code link.
+    3. The signature preview below updates automatically.
+    4. Click the "Copy signature" button.
+    5. Go to Gmail > Settings (⚙️) > See all settings > Signature
+       > paste (Ctrl/Cmd+V) inside the signature box > Save changes.
+
+  ABOUT THE QR CODE: each employee's QR link is available in the last
+  column of the spreadsheet called "Signature QR". The logo and the
+  store badges are fixed and the same for everyone — they don't need
+  to be changed.
+  ============================================================
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Signature Generator — Wellnite</title>
+<style>
+  body { font-family: Arial, Helvetica, sans-serif; background:#f2f2f2; margin:0; padding:24px; color:#222; }
+  .wrap { max-width:640px; margin:0 auto; }
+  h1 { font-size:20px; margin-bottom:4px; }
+  p.sub { color:#666; font-size:13px; margin-top:0; margin-bottom:24px; }
+  .card { background:#fff; border:1px solid #e2e2e2; border-radius:8px; padding:20px; margin-bottom:20px; }
+  label { display:block; font-size:13px; font-weight:bold; margin-bottom:4px; margin-top:14px; }
+  label:first-child { margin-top:0; }
+  input[type=text] { width:100%; box-sizing:border-box; padding:8px 10px; font-size:14px; border:1px solid #ccc; border-radius:5px; }
+  .hint { font-size:11px; color:#999; margin-top:3px; }
+  #copyBtn { margin-top:20px; background:#1d6ae4; color:#fff; border:none; padding:12px 18px; font-size:15px; font-weight:bold; border-radius:6px; cursor:pointer; width:100%; }
+  #copyBtn:hover { background:#1657bd; }
+  #copyStatus { margin-top:10px; font-size:13px; text-align:center; min-height:16px; }
+  .preview-outer { background:#fff; border:1px solid #e2e2e2; border-radius:8px; padding:16px; overflow-x:auto; }
+  .steps { font-size:13px; color:#555; line-height:1.6; }
+  .steps b { color:#222; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Generate your Gmail signature — Wellnite</h1>
+  <p class="sub">Fill in your info, copy the signature, and paste it into Gmail.</p>
+
+  <div class="card">
+    <label for="nombre">Full name</label>
+    <input type="text" id="nombre" value="Paulo González">
+
+    <label for="cargo">Job title</label>
+    <input type="text" id="cargo" value="Co-Founder & Co-CEO">
+
+    <label for="telefono">Phone</label>
+    <input type="text" id="telefono" value="(415) 741-3431">
+
+    <label for="linkedin">Link to your personal LinkedIn</label>
+    <input type="text" id="linkedin" value="https://www.linkedin.com/in/pauloglez90/">
+
+    <label for="qr">Your QR code link (image)</label>
+    <input type="text" id="qr" value="https://raw.githubusercontent.com/fernandowellnite/QR-Fernando/main/paulo%20%283%29.png">
+    <div class="hint">This link is available in the last column of the spreadsheet called "Signature QR".</div>
+
+    <button id="copyBtn" type="button" onclick="copiarFirma()">Copy signature</button>
+    <div id="copyStatus"></div>
+  </div>
+
+  <div class="card">
+    <div class="steps">
+      <b>How to use it:</b><br>
+      1. Fill in your info above (the signature below updates automatically).<br>
+      2. Click "Copy signature".<br>
+      3. Go to Gmail → gear icon ⚙️ → See all settings → General tab → Signature.<br>
+      4. Click inside the signature box and paste (Ctrl/Cmd+V).<br>
+      5. Scroll down and click "Save changes".<br><br>
+      If the "Copy signature" button doesn't work in your browser: click inside the signature box below, select all (Ctrl/Cmd+A), and copy manually (Ctrl/Cmd+C).
+    </div>
+  </div>
+
+  <div class="preview-outer">
+    <!-- ======================= SIGNATURE START (this is what gets copied) ======================= -->
+    <table id="firma" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse; width:600px; background:#ffffff; font-family: Arial, Helvetica, sans-serif;">
+      <tr>
+        <td valign="top" style="padding:10px 20px 10px 10px; width:130px;">
+          <img id="p-qr" src="https://raw.githubusercontent.com/fernandowellnite/QR-Fernando/main/paulo%20%283%29.png" width="120" alt="QR code" style="display:block; border:0; outline:none; text-decoration:none; width:120px; height:auto;">
+        </td>
+        <td valign="top" style="padding:10px 0;">
+          <table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
+            <tr>
+              <td id="p-nombre" style="font-family: Arial, Helvetica, sans-serif; font-size:18px; font-weight:bold; color:#1d6ae4; padding-bottom:2px;">Paulo González</td>
+            </tr>
+            <tr>
+              <td style="font-family: Arial, Helvetica, sans-serif; font-size:14px; padding-bottom:6px;">
+                <a id="p-cargo" href="https://www.linkedin.com/in/pauloglez90/" style="color:#333333; text-decoration:none;">Co-Founder &amp; Co-CEO</a>
+              </td>
+            </tr>
+            <tr>
+              <td id="p-telefono" style="font-family: Arial, Helvetica, sans-serif; font-size:14px; color:#333333; padding-bottom:14px;">(415) 741-3431</td>
+            </tr>
+            <tr>
+              <td style="padding-bottom:10px;">
+                <table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
+                  <tr>
+                    <td valign="middle" style="padding-right:8px;">
+                      <a href="https://apps.apple.com/us/app/wellnite/id6743800695" style="text-decoration:none;">
+                        <img src="https://raw.githubusercontent.com/fernandowellnite/QR-Fernando/main/App_Store_%28iOS%29-Badge-Alternative-Logo.wine.png" width="100" alt="Download on the App Store" style="display:block; border:0; outline:none; text-decoration:none; width:100px; height:auto;">
+                      </a>
+                    </td>
+                    <td valign="middle">
+                      <a href="https://play.google.com/store/apps/details?id=com.wellnite.client.app" style="text-decoration:none;">
+                        <img src="https://raw.githubusercontent.com/fernandowellnite/QR-Fernando/main/5a902dbf7f96951c82922875.png" width="100" alt="Get it on Google Play" style="display:block; border:0; outline:none; text-decoration:none; width:100px; height:auto;">
+                      </a>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td style="font-family: Arial, Helvetica, sans-serif; font-size:13px;">
+                <a href="https://www.linkedin.com/company/wellnite/" style="color:#1d6ae4; text-decoration:none;">Connect with us on LinkedIn!</a>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" style="border-top:2px solid #ff85c3; padding:14px 10px 4px 10px;">
+          <img src="https://raw.githubusercontent.com/fernandowellnite/QR-Fernando/main/Wellnite%20_%20light%20bg.png" width="160" height="38" alt="Wellnite" style="display:block; border:0; outline:none; text-decoration:none; width:160px; height:38px; margin-bottom:6px;">
+          <div style="font-family: Arial, Helvetica, sans-serif; font-size:12px; color:#555555;">Wellnite — thrive through every day</div>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" style="padding:12px 10px 0 10px; font-family: Arial, Helvetica, sans-serif; font-size:11px; color:#888888; font-style:italic;">
+          # My working hours may differ from yours. Please do not feel obligated to reply outside of your normal work schedule.
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" style="padding:10px 10px 10px 10px; font-family: Arial, Helvetica, sans-serif; font-size:10px; color:#999999; line-height:14px;">
+          <strong>CONFIDENTIALITY HIPAA, HITECH, FEDERAL &amp; STATE PRIVACY LAWS COMPLIANCE:</strong><br>
+          All information, documents, and images in any format included in this electronic message are confidential and solely for the intended recipient. The information in this message may contain privileged or sensitive information, including protected health information. Any unauthorized review, use, disclosure, or distribution is strictly prohibited. Please notify the sender and destroy all copies of the original message, including any documents, images, or attachments if you are not the intended recipient.
+        </td>
+      </tr>
+    </table>
+    <!-- ======================= SIGNATURE END ======================= -->
+  </div>
+</div>
+
+<script>
+  function actualizar() {
+    document.getElementById('p-nombre').textContent = document.getElementById('nombre').value;
+    var cargoEl = document.getElementById('p-cargo');
+    cargoEl.textContent = document.getElementById('cargo').value;
+    cargoEl.href = document.getElementById('linkedin').value;
+    document.getElementById('p-telefono').textContent = document.getElementById('telefono').value;
+    document.getElementById('p-qr').src = document.getElementById('qr').value;
+  }
+  ['nombre','cargo','telefono','linkedin','qr'].forEach(function(id){
+    document.getElementById(id).addEventListener('input', actualizar);
+  });
+  actualizar();
+
+  function copiarFirma() {
+    var nodo = document.getElementById('firma');
+    var status = document.getElementById('copyStatus');
+    try {
+      var range = document.createRange();
+      range.selectNode(nodo);
+      var sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+      var ok = document.execCommand('copy');
+      sel.removeAllRanges();
+      if (ok) {
+        status.textContent = '✅ Signature copied. Now paste it into Gmail (Ctrl/Cmd+V).';
+        status.style.color = '#1d8a3e';
+      } else {
+        throw new Error('execCommand failed');
+      }
+    } catch (e) {
+      status.textContent = "Couldn't copy automatically. Select the signature box with your mouse and copy with Ctrl/Cmd+C.";
+      status.style.color = '#b3311c';
+    }
+  }
+</script>
+</body>
+</html>
